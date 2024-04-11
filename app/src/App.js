@@ -1,16 +1,19 @@
 import './App.css';
-import NavHeader from './components/NavHeader';
-import Landing from './components/Landing';
+import SiteHeader from './components/SiteHeader';
+import Forum from './components/Forum';
+import ForumHeader from './components/ForumHeader';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <NavHeader />
+        <SiteHeader />
       </header>
-      <Landing />
+      <div className="Content">
+        <ForumHeader />
+        <Forum />
+      </div>
     </div>
   );
 }
-
 export default App;

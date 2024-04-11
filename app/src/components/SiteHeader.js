@@ -1,7 +1,7 @@
 import React from 'react';
-import './NavHeader.css';
+import './SiteHeader.css';
 
-const NavHeader = () => {
+const SiteHeader = () => {
     return (
         <div className="nav-container">
             <header className="site-header">
@@ -17,4 +17,4 @@ const NavHeader = () => {
     );
 };
 
-export default NavHeader;
+export default SiteHeader;
