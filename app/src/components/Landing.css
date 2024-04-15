@@ -1,0 +1,11 @@
+
+.landing-container {
+    width: 100%; /* Set the width to 100% of its container */
+    height: 100vh; /* Set the height to 100% of the viewport height */
+}
+
+.landing-container img {
+    width: 100%; /* Set the width to 100% of its container */
+    height: 100%; /* Set the height to 100% of its container */
+    object-fit: cover; /* Ensure the image covers the entire container */
+}
