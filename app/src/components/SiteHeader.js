@@ -2,6 +2,7 @@ import React from 'react';
 import './SiteHeader.css';
 
 const SiteHeader = () => {
+
     return (
         <div className="nav-container">
             <header className="site-header">
@@ -9,7 +10,7 @@ const SiteHeader = () => {
                     <h1 className="site-header__title">CSOasis</h1>
                 </div>
                 <div className="site-header__right">
-                    <button className="site-header__button">SIGN IN</button>
+                    <a href="SignIn.html" className="site-header__button">SIGN IN</a>
                     <button className="site-header__button">JOIN</button>
                 </div>
             </header>
