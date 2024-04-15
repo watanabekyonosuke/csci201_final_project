@@ -1,13 +1,11 @@
 import React from 'react';
-import './SiteHeader.css';
+import './SignIn.css';
 
 const SignIn = () => {
 
     return (
-        <div className="SignInContainer">
+        <div className="SignInContainer">Sign In Here</div>
             
-        </div>
-
     );
 };
 
