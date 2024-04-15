@@ -12,6 +12,8 @@ const SiteHeader = () => {
                     <h1 className="site-header__title">CSOasis</h1>
                 </div>
                 <div className="site-header__right">
+                    <li className="site-header__button"><Link to="/SignIn">Sign In</Link></li>
+                    <li className="site-header__button"><Link to="/SignUp">Join Us</Link></li>
                     <li className="site-header__button"><Link to="/Forum">Forum</Link></li>
                     <li className="site-header__button"><Link to="/Landing">Landing</Link></li>
                 </div>
