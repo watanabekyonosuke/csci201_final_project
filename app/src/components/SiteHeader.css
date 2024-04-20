@@ -29,7 +29,7 @@
 }
 
 /*for some reason forcing the li elements to type a makes them look correct*/
-.explore a, .signin a{
+.explore a, .signin a, .home a{
     text-decoration: none;
     font-size: 17px;
     padding: 10px;
