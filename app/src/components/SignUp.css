@@ -1,8 +1,9 @@
-.signin-container {
+.signup-container {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     margin: 0;
     padding: 20px;
+    height: 100vh;
 }
 
 .signup-container form {

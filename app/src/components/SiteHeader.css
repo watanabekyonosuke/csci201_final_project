@@ -28,13 +28,23 @@
     font-family: Verdana;
 }
 
-.site-header__button {
-    margin-left: 5px;
-    padding: 8px 16px;
-    font-size: 16px;
-    font-family: Verdana;
-    border: none;
+/*for some reason forcing the li elements to type a makes them look correct*/
+.explore a, .signin a{
+    text-decoration: none;
+    font-size: 17px;
+    padding: 10px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    color: #000000;
     background-color: #ffffff;
-    color:#2FA8F9;
-    cursor: pointer;
+}
+
+.signup a{
+    text-decoration: none;
+    font-size: 17px;
+    padding: 10px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    color: #ffffff;
+    background-color: #000000;
 }

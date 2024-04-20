@@ -8,8 +8,6 @@ const Landing = () => {
         <div className="landing-container">
             <img src={backgroundImage}></img>
             <div className='block'>
-               
-                
 
             </div>
 
