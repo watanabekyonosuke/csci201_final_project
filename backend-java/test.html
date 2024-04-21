@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forum Discussion Test</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Test ForumDisplayServlet
+            $('#testForumDisplay').click(function() {
+                var fgid = $('#fgid').val();
+                var sort = $('#sort').val();
+                var requestData = {
+                    fgid: fgid,
+                    sort: sort
+                };
+                $.ajax({
+                    url: 'ForumDisplayServlet',
+                    type: 'POST',
+                    data: JSON.stringify(requestData),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        var discussions = response;
+                        var discussionList = $('#discussionList');
+                        discussionList.empty();
+                        discussions.forEach(function(discussion) {
+                            var listItem = $('<li>').text('Title: ' + discussion.title + ', Likes: ' + discussion.likes + ', Creation Time: ' + discussion.creationtime + ' hours ago');
+                            discussionList.append(listItem);
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error:', error);
+                    }
+                });
+            });
+
+            // Test CommentServlet
+            $('#testComments').click(function() {
+                var titleid = $('#titleid').val();
+                var requestData = {
+                    titleid: titleid
+                };
+                $.ajax({
+                    url: 'CommentServlet',
+                    type: 'POST',
+                    data: JSON.stringify(requestData),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        var comments = response;
+                        var commentList = $('#commentList');
+                        commentList.empty();
+                        comments.forEach(function(comment) {
+                            var listItem = $('<li>').text('Comment: ' + comment.content + ', User: ' + comment.username);
+                            commentList.append(listItem);
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error:', error);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Forum Discussion Test</h1>
+
+    <h2>Test ForumDisplayServlet</h2>
+    <label for="fgid">Forum Group ID:</label>
+    <input type="text" id="fgid">
+    <label for="sort">Sort By:</label>
+    <select id="sort">
+        <option value="0">Likes</option>
+        <option value="1">Creation Time</option>
+    </select>
+    <button id="testForumDisplay">Test Forum Display</button>
+    <ul id="discussionList"></ul>
+
+    <h2>Test CommentServlet</h2>
+    <label for="titleid">Discussion ID:</label>
+    <input type="text" id="titleid">
+    <button id="testComments">Test Comments</button>
+    <ul id="commentList"></ul>
+</body>
+</html>
