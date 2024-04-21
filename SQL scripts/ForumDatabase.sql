@@ -20,6 +20,7 @@ CREATE TABLE ForumDiscussions (
     userid INT,
     post VARCHAR(2000),
     creationtime DATETIME,
+    likes INT DEFAULT 0,
     FOREIGN KEY (fgid) REFERENCES ForumGroups(fgid),
     FOREIGN KEY (userid) REFERENCES User(userid)
 );
