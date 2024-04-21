@@ -1,6 +1,7 @@
 package forum;
 
 public class discussion {
+	private String username;
 	private int titleid;
 	
 	private String title;
@@ -61,6 +62,13 @@ public class discussion {
 
 	public void setNumofcomments(int numofcomments) {
 		this.numofcomments = numofcomments;
+	}
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	private int fgid;
 	private int userid;

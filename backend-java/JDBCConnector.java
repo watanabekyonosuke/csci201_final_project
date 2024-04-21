@@ -205,31 +205,35 @@ public class JDBCConnector {
 	    try {
 	        conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
 
-	        String query = "SELECT fd.titleid, fd.title, fd.fgid, fd.userid, fd.post, fd.creationtime, fd.likes, " +
+	        String query = "SELECT fd.titleid, fd.title, fd.fgid, fd.userid, u.username, fd.post, fd.creationtime, fd.likes, " +
                     "       (SELECT COUNT(*) FROM Comments c WHERE c.titleid = fd.titleid) AS commentCount " +
                     "FROM ForumDiscussions fd " +
+                    "JOIN User u ON fd.userid = u.userid " +
                     "WHERE fd.titleid = ?";
 
-	        stmt = conn.prepareStatement(query);
-	        stmt.setInt(1, titleid);
-
-	        rs = stmt.executeQuery();
-
-	        if (rs.next()) {
-	            discussion = new discussion();
-	            discussion.setTitleid(rs.getInt("titleid"));
-	            discussion.setTitle(rs.getString("title"));
-	            discussion.setFgid(rs.getInt("fgid"));
-	            discussion.setUserid(rs.getInt("userid"));
-	            discussion.setPost(rs.getString("post"));
-	            Timestamp creationTimestamp = rs.getTimestamp("creationtime");
-	            Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-	            long diffInMillis = currentTimestamp.getTime() - creationTimestamp.getTime();
-	            int diffInHours = (int) (diffInMillis / (60 * 60 * 1000));
-	            discussion.setCreationtime(diffInHours);
-	            discussion.setLikes(rs.getInt("likes"));
-	            discussion.setNumofcomments(rs.getInt("commentCount"));
-	        }
+		     stmt = conn.prepareStatement(query);
+		     stmt.setInt(1, titleid);
+		
+		     rs = stmt.executeQuery();
+		
+		     if (rs.next()) {
+		         discussion = new discussion();
+		         discussion.setTitleid(rs.getInt("titleid"));
+		         discussion.setTitle(rs.getString("title"));
+		         discussion.setFgid(rs.getInt("fgid"));
+		         discussion.setUserid(rs.getInt("userid"));
+		         discussion.setUsername(rs.getString("username")); // Set the username
+		         discussion.setPost(rs.getString("post"));
+		
+		         Timestamp creationTimestamp = rs.getTimestamp("creationtime");
+		         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+		         long diffInMillis = currentTimestamp.getTime() - creationTimestamp.getTime();
+		         int diffInHours = (int) (diffInMillis / (60 * 60 * 1000));
+		         discussion.setCreationtime(diffInHours);
+		
+		         discussion.setLikes(rs.getInt("likes"));
+		         discussion.setNumofcomments(rs.getInt("commentCount"));
+			 }
 	    } finally {
 	        if (rs != null) {
 	            rs.close();
