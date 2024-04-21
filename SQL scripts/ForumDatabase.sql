@@ -31,6 +31,7 @@ CREATE TABLE Comments (
     comment VARCHAR(2000),
     titleid INT,
     creationtime DATETIME,
+    likes INT DEFAULT 0,
     FOREIGN KEY (userid) REFERENCES User(userid),
     FOREIGN KEY (titleid) REFERENCES ForumDiscussions(titleid)
 );
