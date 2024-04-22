@@ -1,0 +1,8 @@
+.DiscussionList {
+    display: flex;
+    flex-direction: column;
+}
+
+.DiscussionItem {
+    margin-bottom: 20px;
+}

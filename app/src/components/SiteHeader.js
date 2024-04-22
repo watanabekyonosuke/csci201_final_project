@@ -7,7 +7,7 @@ const SiteHeader = () => {
 
     const location = useLocation();
     let logsign = location.pathname.includes("/SignIn") || location.pathname.includes("/SignUp");
-    let discussing = location.pathname.includes("/Forum");
+    let discussing = location.pathname.includes("/ForumList") || location.pathname.includes("Discussion");
 
     return (
         <>
@@ -20,7 +20,7 @@ const SiteHeader = () => {
                     </div>
                     <div className="site-header__right">
                         {!discussing && (
-                            <li className="explore"><Link to="/Forum">Explore Discussions</Link></li> )}
+                            <li className="explore"><Link to="/ForumList">Explore Discussions</Link></li> )}
                         {discussing && (
                             <li className="home"><Link to="/Landing"><FaHome /></Link></li> )}
                         <li className="signin"><Link to="/SignIn">Log In</Link></li>
