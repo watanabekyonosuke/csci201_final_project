@@ -7,7 +7,7 @@ const SignUp = () => {
     return (
         <div className="signup-container">
         <a><Link to="/Landing" className="back-button">&#8592;</Link></a>
-        <form action="CSCI201_Final_Project_V1" method="post">
+        <form action="forumdata" method="post">
             <fieldset>
                 <legend>Sign Up</legend>
                 <label htmlFor="signUpUsername">Username:</label>
