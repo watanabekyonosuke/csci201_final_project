@@ -6,7 +6,7 @@ const Discussion = () => {
 
     return (
         <div className="discussion-container">
-            <a><Link to="/ForumList" className="back-button">&#8592;</Link></a>
+            <Link to="/ForumList" className="back-button">&#8592;</Link>
         </div>
     );
 }

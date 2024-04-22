@@ -11,11 +11,12 @@ const ForumList = () => {
 
     const fetchDiscussions = () => {
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/ForumDisplayServlet');
+        xhr.open('POST', 'http://localhost:3001/ProjectBackend/ForumDisplayServlet');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onload = () => {
             if (xhr.status === 200) {
                 const data = JSON.parse(xhr.responseText);
+                console.log("got json");
                 setDiscussions(data);
             } else {
                 console.error('Error fetching discussions:', xhr.statusText);
@@ -42,7 +43,6 @@ const ForumList = () => {
                     </div>
                 ))}
             </div>
-            <a><Link to="/Discussion">Enter discussion</Link></a>
         </div>
     );
 };
