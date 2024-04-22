@@ -1,16 +1,17 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 import './Forum.css';
 import ForumHeader from './ForumHeader';
 
-const Forum = () => {
+const ForumList = () => {
     return (
         <div className="ForumContainer">
             <div>
                 <ForumHeader />
             </div>
-            <h1>Forum Content</h1>
+            <a><Link to="/Discussion">Enter discussion</Link></a>
         </div>
     );
 };
 
-export default Forum;
+export default ForumList;
