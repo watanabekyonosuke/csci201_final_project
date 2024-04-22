@@ -2,19 +2,19 @@ DROP DATABASE IF EXISTS ForumData;
 CREATE DATABASE ForumData;
 USE ForumData;
 CREATE TABLE ForumGroups (
-    fgid INT PRIMARY KEY,
+    fgid INT PRIMARY KEY  NOT NULL AUTO_INCREMENT,
     name VARCHAR(255)
 );
 
 CREATE TABLE User (
-    userid INT PRIMARY KEY,
+    userid INT PRIMARY KEY  NOT NULL AUTO_INCREMENT,
     username VARCHAR(255),
     email VARCHAR(255),
     password VARCHAR(255)
 );
 
 CREATE TABLE ForumDiscussions (
-    titleid INT PRIMARY KEY,
+    titleid INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     title VARCHAR(100),
     fgid INT,
     userid INT,
@@ -26,7 +26,7 @@ CREATE TABLE ForumDiscussions (
 );
 
 CREATE TABLE Comments (
-    commentid INT PRIMARY KEY,
+    commentid INT PRIMARY KEY  NOT NULL AUTO_INCREMENT,
     userid INT,
     comment VARCHAR(2000),
     titleid INT,
@@ -36,7 +36,7 @@ CREATE TABLE Comments (
     FOREIGN KEY (titleid) REFERENCES ForumDiscussions(titleid)
 );
 
---Assuming 6 groups
+-- --Assuming 6 groups
 
  INSERT INTO forumgroups(name)
  VALUES ('SWE'), ('Product Management'), ('Quant'), ('MAANG'), ('Data Science'), ('Hardware');
@@ -46,10 +46,9 @@ CREATE TABLE Comments (
  INSERT INTO user (username, email, password)
 VALUES ('ttrojan', 'ttrojan@usc.edu', 'gosc');
 
---
---Create HardCoded data
---
---1) ForumDiscussions (one for each group)
+-- Create HardCoded data
+-- --
+-- 1) ForumDiscussions (one for each group)
 INSERT INTO ForumDiscussions (title, fgid, userid, post, creationtime)
 VALUES
 ('Is it bad to renege on my full-time offer for another company?', 
