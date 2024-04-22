@@ -1,4 +1,4 @@
-package forum;
+	package forum;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 
 public class JDBCConnector {
 	private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "Completist99";
+    private static final String DB_PASSWORD = "root";
 	public static List<Integer> sortbyLikes() throws SQLException{
 	    List<Integer> disIDs = new ArrayList<>();
 	    try {
@@ -305,4 +305,153 @@ public class JDBCConnector {
 	
 	    return comments;
 	}
+	
+	public static int registerUser(String username, String password, String email) {
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		}catch(ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+		}
+		
+	    Connection conn = null;
+	    Statement st = null;
+	    ResultSet rs = null;
+	
+		
+		int userid = -1;
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+			
+			st = conn.createStatement();
+			System.out.println("Connected to database successfully.");
+			
+			rs = st.executeQuery("SELECT * FROM users WHERE username='" + username + "'");
+			if (!rs.next()) {
+				st = conn.createStatement();
+				rs = st.executeQuery("SELECT * FROM users WHERE email='" + email + "'");
+				if(!rs.next()) {  // if no user exists with the same username or email
+					rs.close();
+					st.execute("INSERT INTO users (username, password, email, balance) VALUES ('" + username + "', '" + password + "', '" + email + "')");
+					rs = st.executeQuery("SELECT LAST_INSERT_ID()");
+					rs.next();
+					userid = rs.getInt(1);
+				}else {   //taken email
+					userid = -2;
+				}
+			}
+		}catch (SQLException sqle) {
+	        System.out.println("SQLException in loginUser");
+	        sqle.printStackTrace();
+	    
+	    } finally {
+	        try {
+	            if (rs != null) {
+	                rs.close();
+	            }
+	            if (st != null) {
+	                st.close();
+	            }
+	            if (conn != null) {
+	                conn.close();
+	            }
+	        } catch (SQLException sqle) {
+	            System.out.println("sqle " + sqle.getMessage());
+	        }
+	    }
+		
+		return userid;
+	}
+	
+	public static boolean createComment(String content, int userid, int timeOfPost, int numLikes) {
+	    Connection conn = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    
+	    // not completed
+	    return true;
+	}
+	
+	public static boolean login(String username, String password) throws ClassNotFoundException {
+	    Connection conn = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+	        
+	        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+	        ps = conn.prepareStatement(sql);
+	        ps.setString(1, username);
+	        ps.setString(2, password);
+	        
+	        rs = ps.executeQuery();
+	        
+	        if (rs.next()) {
+	        	return true;
+	        }else {
+	        	return false;
+	        }
+	  
+	    }catch (SQLException e) {
+	    	e.printStackTrace();
+	    	return false;
+	    }finally {
+	        try {
+	            if (rs != null) {
+	                rs.close();
+	            }
+	            if (ps != null) {
+	                ps.close();
+	            }
+	            if (conn != null) {
+	                conn.close();
+	            }
+	        } catch (SQLException sqle) {
+	            System.out.println("sqle " + sqle.getMessage());
+	        }
+	    }
+	}
+	
+	public static int getUserId(String username) throws SQLException, ClassNotFoundException {
+	    Connection conn = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    
+	    int userid = 0;
+	    
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+			
+			String query = "SELECT userid FROM user WHERE username = ?";
+			ps = conn.prepareStatement(query);
+			ps.setString(1, username);
+			
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				userid = rs.getInt("userId");
+			}
+	    }catch (SQLException e) {
+	    	e.printStackTrace();
+	    	return -1;
+	    }finally {
+     
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+	        
+	    }
+	    
+	    return userid;
+	}
+	
 }
