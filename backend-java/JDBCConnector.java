@@ -432,7 +432,7 @@ public class JDBCConnector {
 			
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				userid = rs.getInt("userId");
+				userid = rs.getInt("userid");
 			}
 	    }catch (SQLException e) {
 	    	e.printStackTrace();
