@@ -364,13 +364,102 @@ public class JDBCConnector {
 		return userid;
 	}
 	
-	public static boolean createComment(String content, int userid, int timeOfPost, int numLikes) {
+	public static boolean createPost(String title, int fgid, int userid, String post) throws SQLException {
+	   		
+		Connection conn = null;
+	    PreparedStatement ps = null;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+			String sql = "INSERT INTO ForumDiscussions (title, fgid, userid, post, creationtime, likes) VALUES (?, ?, ?, ?, ?, ?)";
+			
+	        ps = conn.prepareStatement(sql);
+	        
+	        Timestamp creationTime = new Timestamp(System.currentTimeMillis());
+
+	        ps.setString(1, title);
+	        ps.setInt(2, fgid);
+	        ps.setInt(3, userid);
+	        ps.setString(4, post);
+	        ps.setTimestamp(5, creationTime);  // Assuming creationTime is the number of hours past since creation, adjust if using a TIMESTAMP
+	        ps.setInt(6, 0);
+	        int result = ps.executeUpdate();
+	        
+	        if (result > 0) {
+	            return true;
+	        } else {
+	            return false;
+	        }
+	    } catch (ClassNotFoundException e) {
+	        e.printStackTrace();
+	        return false;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    } finally {
+	        // Close resources to prevent memory leaks
+	        try {
+	            if (ps != null) {
+	                ps.close();
+	            }
+	            if (conn != null) {
+	                conn.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+		
+	}
+	
+	public static boolean createComment(String content, int userid, int titleid, int timeOfPost) {
 	    Connection conn = null;
 	    PreparedStatement ps = null;
-	    ResultSet rs = null;
+
 	    
-	    // not completed
-	    return true;
+	    try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+			String sql = "INSERT INTO comments (userid, comment, titleid, creationtime, likes) VALUES (?, ?, ?, ?, ?)";
+			
+	        ps = conn.prepareStatement(sql);
+	        
+	        Timestamp creationTime = new Timestamp(System.currentTimeMillis());
+	        
+	        ps.setInt(1, userid);
+	        ps.setString(2, content);
+	        ps.setInt(3, titleid);
+	        ps.setTimestamp(4, creationTime);
+	        ps.setInt(5, 0);
+	        
+	        int result = ps.executeUpdate();
+	        
+	        if (result > 0) {
+	        	return true;
+	        }else {
+	        	return false;
+	        }
+	        
+	    }catch (ClassNotFoundException e) {
+	        e.printStackTrace();
+	        return false;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    } finally {
+	        // Close resources to prevent memory leaks
+	        try {
+	            if (ps != null) {
+	                ps.close();
+	            }
+	            if (conn != null) {
+	                conn.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	}
 	
 	public static boolean login(String username, String password) throws ClassNotFoundException {
