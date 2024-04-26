@@ -4,10 +4,14 @@ import './SignIn.css';
 
 const SignIn = () => {
 
+    function handleSignIn(){
+
+    }
+
     return (
         <div className="signin-container">
             <a><Link to="/Landing" className="back-button">&#8592;</Link></a>
-            <form action="forumdata" method="post">
+            <form id="signin" onSubmit="event.preventDefault(); handleSignIn();">
                 <fieldset>
                     <legend>Login</legend>
                     <label htmlFor="loginUsername">Username:</label>
