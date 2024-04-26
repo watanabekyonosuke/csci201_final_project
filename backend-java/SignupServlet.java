@@ -17,13 +17,21 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 @WebServlet("/SignupServlet")
-public class SignupServlet {
+public class SignupServlet extends HttpServlet{
 	  private static final long serialVersionUID = 1L;
 	  
 	  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-	    	PrintWriter pw = response.getWriter();
+		  
+		  	response.setHeader("Access-Control-Allow-Origin", "*"); // Allow requests from any origin
+	        response.setHeader("Access-Control-Allow-Methods", "POST"); // Allow POST requests
+	        response.setHeader("Access-Control-Allow-Headers", "Content-Type"); // Allow Content-Type header
+	        response.setHeader("Access-Control-Max-Age", "3600"); // Cache preflight response for 1 hour
+	    	
 	        response.setContentType("application/json");
 	        response.setCharacterEncoding("UTF-8");
+	        
+	        PrintWriter pw = response.getWriter();
+	        
 	        
 	        System.out.println("SignupServlet called");	        
 	        

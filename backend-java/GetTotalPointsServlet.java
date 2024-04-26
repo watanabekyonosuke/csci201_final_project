@@ -19,10 +19,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 @WebServlet("/GetTotalPointsServlet")
-public class GetTotalPointsServlet {
+public class GetTotalPointsServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException{
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
     	PrintWriter pw = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -32,7 +32,13 @@ public class GetTotalPointsServlet {
     	Integer userid = (Integer) request.getSession().getAttribute("userid");     
         Gson gson = new GsonBuilder().create();
                 
-        int viewTotalPoints = JDBCConnector.getPoints(userid);
+        int viewTotalPoints = 0;
+		try {
+			viewTotalPoints = JDBCConnector.getPoints(userid);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         if (viewTotalPoints < 0) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

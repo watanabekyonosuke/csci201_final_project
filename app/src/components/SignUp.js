@@ -4,10 +4,40 @@ import './SignUp.css';
 
 const SignUp = () => {
 
+    const handleSignUp = (event) =>{
+        event.preventDefault();
+        const uname = document.getElementById("signUpUsername").value;
+        const email = document.getElementById("signUpEmail").value;
+        const pword = document.getElementById("signUpPassword").value;
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", 'http://localhost:3001/ProjectBackend/SignupServlet', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    const reply = JSON.parse(xhr.responseText);
+                    console.log("signup");
+                    const userId = reply.userId;
+                    console.log(userId);
+                    localStorage.setItem("uid", userId);
+                }
+                else{
+                    console.log("not");
+                }
+            }
+        };
+
+        const sendJSON = JSON.stringify({username: uname, email: email, password: pword});
+        xhr.send(sendJSON);
+
+    };
+
     return (
         <div className="signup-container">
         <Link to="/Landing" className="back-button">&#8592;</Link>
-        <form action="forumdata" method="post">
+        <form id="signup" onSubmit={handleSignUp}>
             <fieldset>
                 <legend>Sign Up</legend>
                 <label htmlFor="signUpUsername">Username:</label>

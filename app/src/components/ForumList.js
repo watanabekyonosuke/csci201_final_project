@@ -11,7 +11,7 @@ const ForumList = () => {
 
     const fetchDiscussions = () => {
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://localhost:8080/ProjectBackend/ForumDisplayServlet');
+        xhr.open('POST', 'http://localhost:3001/ProjectBackend/ForumDisplayServlet');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onload = () => {
             if (xhr.status === 200) {

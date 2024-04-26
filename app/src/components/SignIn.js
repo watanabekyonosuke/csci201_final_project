@@ -10,17 +10,17 @@ const SignIn = () => {
         const pword = document.getElementById("loginPassword").value;
 
         let xhr = new XMLHttpRequest();
-        const url = "SigninServlet"
-        xhr.open("POST", 'http://localhost:8080/ProjectBackend/SigninServlet', true);
+        xhr.open("POST", 'http://localhost:3001/ProjectBackend/SigninServlet', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     const reply = JSON.parse(xhr.responseText);
-                    console.log(reply);
                     console.log("signin");
-                    console.log(reply.userId);
+                    const userId = reply.userId;
+                    console.log(userId);
+                    localStorage.setItem("uid", userId);
                 }
                 else{
                     console.log("not");

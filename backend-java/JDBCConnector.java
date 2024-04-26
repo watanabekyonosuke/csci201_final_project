@@ -330,10 +330,10 @@ public class JDBCConnector {
 			rs = st.executeQuery("SELECT * FROM User WHERE username='" + username + "'");
 			if (!rs.next()) {
 				st = conn.createStatement();
-				rs = st.executeQuery("SELECT * FROM users WHERE email='" + email + "'");
+				rs = st.executeQuery("SELECT * FROM User WHERE email='" + email + "'");
 				if(!rs.next()) {  // if no user exists with the same username or email
 					rs.close();
-					st.execute("INSERT INTO users (username, password, email, points) VALUES ('" + username + "', '" + password + "', '" + email + "', 0)");					rs = st.executeQuery("SELECT LAST_INSERT_ID()");
+					st.execute("INSERT INTO User (username, password, email, points) VALUES ('" + username + "', '" + password + "', '" + email + "', 0)");					rs = st.executeQuery("SELECT LAST_INSERT_ID()");
 					rs.next();
 					userid = rs.getInt(1);
 				}else {   //taken email
@@ -389,7 +389,7 @@ public class JDBCConnector {
 	        int result = ps.executeUpdate();
 	        
 	        if (result > 0) {
-				String sql2 = "SELECT points FROM user where userid = ?";
+				String sql2 = "SELECT points FROM User where userid = ?";
 	        	
 	        	ps = conn.prepareStatement(sql2);
 	        	ps.setInt(1, userid);
