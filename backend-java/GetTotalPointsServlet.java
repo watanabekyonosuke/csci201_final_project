@@ -22,17 +22,20 @@ import com.google.gson.GsonBuilder;
 public class GetTotalPointsServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
     	PrintWriter pw = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
         User user = new Gson().fromJson(request.getReader(), User.class);
         
-    	Integer userid = (Integer) request.getSession().getAttribute("userid");     
-        Gson gson = new GsonBuilder().create();
+    	Integer userid = user.getUserid();     
+    	System.out.println(userid);
+    	
+    	Gson gson = new GsonBuilder().create();
                 
         int viewTotalPoints = 0;
+        
 		try {
 			viewTotalPoints = JDBCConnector.getPoints(userid);
 		} catch (ClassNotFoundException e) {
