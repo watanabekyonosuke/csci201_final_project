@@ -5,6 +5,7 @@ public class User {
 	private String email;
 	private String password;
 	private int points;
+	private int userid;
 	
 	public User() {}  // default constructor
 
@@ -38,6 +39,14 @@ public class User {
 
 	public void setPoints(int points) {
 		this.points = points;
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 	
 	
