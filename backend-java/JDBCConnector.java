@@ -191,26 +191,21 @@ public class JDBCConnector {
 	}
 	public static discussion getDiscussionById(int titleid) throws SQLException {
 	    discussion discussion = null;
-
 	    try {
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	    } catch (ClassNotFoundException e) {
 	        e.printStackTrace();
 	    }
-
 	    Connection conn = null;
 	    PreparedStatement stmt = null;
 	    ResultSet rs = null;
-
 	    try {
 		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
-
 	        String query = "SELECT fd.titleid, fd.title, fd.fgid, fd.userid, u.username, fd.post, fd.creationtime, fd.likes, " +
-                    "       (SELECT COUNT(*) FROM Comments c WHERE c.titleid = fd.titleid) AS commentCount " +
-                    "FROM ForumDiscussions fd " +
-                    "JOIN User u ON fd.userid = u.userid " +
-                    "WHERE fd.titleid = ?";
-
+                   "       (SELECT COUNT(*) FROM Comments c WHERE c.titleid = fd.titleid) AS commentCount " +
+                   "FROM ForumDiscussions fd " +
+                   "JOIN User u ON fd.userid = u.userid " +
+                   "WHERE fd.titleid = ?";
 		     stmt = conn.prepareStatement(query);
 		     stmt.setInt(1, titleid);
 		
@@ -222,15 +217,12 @@ public class JDBCConnector {
 		         discussion.setTitle(rs.getString("title"));
 		         discussion.setFgid(rs.getInt("fgid"));
 		         discussion.setUserid(rs.getInt("userid"));
-		         discussion.setUsername(rs.getString("username")); // Set the username
+		         discussion.setUsername(rs.getString("username")); 
 		         discussion.setPost(rs.getString("post"));
 		
 		         Timestamp creationTimestamp = rs.getTimestamp("creationtime");
-		         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-		         long diffInMillis = currentTimestamp.getTime() - creationTimestamp.getTime();
-		         int diffInHours = (int) (diffInMillis / (60 * 60 * 1000));
+		         int diffInHours = (int) calculateHoursDifference(creationTimestamp);
 		         discussion.setCreationtime(diffInHours);
-		
 		         discussion.setLikes(rs.getInt("likes"));
 		         discussion.setNumofcomments(rs.getInt("commentCount"));
 			 }
@@ -245,9 +237,9 @@ public class JDBCConnector {
 	            conn.close();
 	        }
 	    }
-
 	    return discussion;
 	}
+
 	
 
 	public static List<Comment> getCommentsByTitleId(int titleid) throws SQLException {
@@ -630,5 +622,12 @@ public class JDBCConnector {
 	        }
 	    }
 	}
+	private static long calculateHoursDifference(Timestamp creationTimestamp) {
+	    Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+	    long diffInMillis = currentTimestamp.getTime() - creationTimestamp.getTime();
+	    long diffInHours = diffInMillis / (60 * 60 * 1000);
+	    return Math.max(diffInHours, 0); // Ensure no negative values
+	}
+
 	
 }
