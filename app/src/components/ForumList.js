@@ -36,7 +36,7 @@ const ForumList = () => {
             <div className="DiscussionList">
                 {discussions.map((discussion, index) => (
                     <div key={index} className="DiscussionItem">
-                        <div>{discussion.post}</div>
+                        <div>Title: {discussion.title}</div>
                         <div>Likes: {discussion.likes}</div>
                         <div>Creation Time: {discussion.creationtime}</div>
                         <div>Number of Comments: {discussion.numofcomments}</div>
