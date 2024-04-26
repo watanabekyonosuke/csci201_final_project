@@ -5,7 +5,7 @@ const ForumHeader = () => {
 
     const [selectedButton, setSelectedButton] = useState(2); // Initially set to 2nd button
 
-    if(selectedButton == 2) localStorage.setItem("forumGroup", 2); // Initially set stored fid to 2nd button
+    if(selectedButton === 2) localStorage.setItem("forumGroup", 2); // Initially set stored fid to 2nd button
 
     const handleButtonClick = (buttonIndex) => {
         setSelectedButton(buttonIndex);

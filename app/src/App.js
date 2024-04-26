@@ -6,7 +6,8 @@ import Landing from './components/Landing';
 import ForumList from './components/ForumList';
 import Discussion from './components/Discussion';
 import SignIn from './components/SignIn';
-import SignUp from './components/SignUp'
+import SignUp from './components/SignUp';
+import CreatePost from './components/CreatePost';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="ForumList" element={<ForumList />}/>
           <Route path="Discussion" element={<Discussion />}/>
           <Route path="Landing" element={<Landing />}/>
+          <Route path="CreatePost" element={<CreatePost />}/>
         </Routes>
       </div>
     </BrowserRouter>
