@@ -327,7 +327,7 @@ public class JDBCConnector {
 			st = conn.createStatement();
 			System.out.println("Connected to database successfully.");
 			
-			rs = st.executeQuery("SELECT * FROM users WHERE username='" + username + "'");
+			rs = st.executeQuery("SELECT * FROM User WHERE username='" + username + "'");
 			if (!rs.next()) {
 				st = conn.createStatement();
 				rs = st.executeQuery("SELECT * FROM users WHERE email='" + email + "'");
@@ -400,7 +400,7 @@ public class JDBCConnector {
 		        	points += 2; // Add two points for new post
 	        	}
 	
-	        	String updatePoints = "UPDATE user SET points = ? WHERE userid = ?";
+	        	String updatePoints = "UPDATE User SET points = ? WHERE userid = ?";
 	        	ps = conn.prepareStatement(updatePoints);
 	        	
 	        	ps.setInt(1, points);
@@ -461,7 +461,7 @@ public class JDBCConnector {
 	        int result = ps.executeUpdate();
 	        
 	        if (result > 0) {
-	        	String sql2 = "SELECT points FROM user where userid = ?";
+	        	String sql2 = "SELECT points FROM User where userid = ?";
 	        	
 	        	ps = conn.prepareStatement(sql2);
 	        	ps.setInt(1, userid);
@@ -519,7 +519,7 @@ public class JDBCConnector {
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
 	        
-	        String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
+	        String sql = "SELECT * FROM User WHERE username = ? AND password = ?";
 	        ps = conn.prepareStatement(sql);
 	        ps.setString(1, username);
 	        ps.setString(2, password);
@@ -602,7 +602,7 @@ public class JDBCConnector {
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
 		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
 		    
-		    String sql = "SELECT points FROM user WHERE userid = ?";
+		    String sql = "SELECT points FROM User WHERE userid = ?";
 		    
 		    ps = conn.prepareStatement(sql);
 		    ps.setInt(1, userid);

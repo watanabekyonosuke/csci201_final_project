@@ -65,8 +65,9 @@ public class SigninServlet  extends HttpServlet{
 				HttpSession session = request.getSession();
 				session.setAttribute("userId", userid); 
 				response.setStatus(HttpServletResponse.SC_OK);
-				Map<String, String> success = new HashMap<>();
+				Map<String, Object> success = new HashMap<>();
 				success.put("success", "User is registered");
+				success.put("userId", userid); // Include userId in the response
 				System.out.println(gson.toJson(success));
 				pw.write(gson.toJson(success));
 				pw.flush();
