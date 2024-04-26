@@ -1,8 +1,10 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import './SignIn.css';
 
 const SignIn = () => {
+
+    const navigate = useNavigate();
 
     const handleSignIn = (event) =>{
         event.preventDefault();
@@ -17,13 +19,16 @@ const SignIn = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     const reply = JSON.parse(xhr.responseText);
-                    console.log("signin");
                     const userId = reply.userId;
-                    console.log(userId);
                     localStorage.setItem("uid", userId);
+                    alert(reply.success);
+                    navigate("/Landing");
+
+                    
                 }
                 else{
-                    console.log("not");
+                    const reply = JSON.parse(xhr.responseText);
+                    alert(reply.error);
                 }
             }
         };

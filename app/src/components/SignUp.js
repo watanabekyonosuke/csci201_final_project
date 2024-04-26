@@ -1,8 +1,10 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import './SignUp.css';
 
 const SignUp = () => {
+
+    const navigate = useNavigate();
 
     const handleSignUp = (event) =>{
         event.preventDefault();
@@ -18,13 +20,15 @@ const SignUp = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     const reply = JSON.parse(xhr.responseText);
-                    console.log("signup");
                     const userId = reply.userId;
-                    console.log(userId);
                     localStorage.setItem("uid", userId);
+                    alert("Successful Signup");
+                    navigate("/Landing");
+
                 }
                 else{
-                    console.log("not");
+                    const reply = JSON.parse(xhr.responseText);
+                    alert(reply);
                 }
             }
         };
