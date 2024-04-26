@@ -333,8 +333,7 @@ public class JDBCConnector {
 				rs = st.executeQuery("SELECT * FROM users WHERE email='" + email + "'");
 				if(!rs.next()) {  // if no user exists with the same username or email
 					rs.close();
-					st.execute("INSERT INTO users (username, password, email, balance) VALUES ('" + username + "', '" + password + "', '" + email + "')");
-					rs = st.executeQuery("SELECT LAST_INSERT_ID()");
+					st.execute("INSERT INTO users (username, password, email, points) VALUES ('" + username + "', '" + password + "', '" + email + "', 0)");					rs = st.executeQuery("SELECT LAST_INSERT_ID()");
 					rs.next();
 					userid = rs.getInt(1);
 				}else {   //taken email
@@ -368,13 +367,16 @@ public class JDBCConnector {
 	   		
 		Connection conn = null;
 	    PreparedStatement ps = null;
+		ResultSet rs = null;
+	    
+	    int points = 0;
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
-			String sql = "INSERT INTO ForumDiscussions (title, fgid, userid, post, creationtime, likes) VALUES (?, ?, ?, ?, ?, ?)";
+			String sql1 = "INSERT INTO ForumDiscussions (title, fgid, userid, post, creationtime, likes) VALUES (?, ?, ?, ?, ?, ?)";
 			
-	        ps = conn.prepareStatement(sql);
+	        ps = conn.prepareStatement(sql1);
 	        
 	        Timestamp creationTime = new Timestamp(System.currentTimeMillis());
 
@@ -382,11 +384,29 @@ public class JDBCConnector {
 	        ps.setInt(2, fgid);
 	        ps.setInt(3, userid);
 	        ps.setString(4, post);
-	        ps.setTimestamp(5, creationTime);  // Assuming creationTime is the number of hours past since creation, adjust if using a TIMESTAMP
+	        ps.setTimestamp(5, creationTime);  
 	        ps.setInt(6, 0);
 	        int result = ps.executeUpdate();
 	        
 	        if (result > 0) {
+				String sql2 = "SELECT points FROM user where userid = ?";
+	        	
+	        	ps = conn.prepareStatement(sql2);
+	        	ps.setInt(1, userid);
+	        	rs = ps.executeQuery();
+	        	
+	        	if (rs.next()) {
+		        	points = rs.getInt("points");
+		        	points += 2; // Add two points for new post
+	        	}
+	
+	        	String updatePoints = "UPDATE user SET points = ? WHERE userid = ?";
+	        	ps = conn.prepareStatement(updatePoints);
+	        	
+	        	ps.setInt(1, points);
+	        	ps.setInt(2, userid);
+	        	
+	        	ps.executeUpdate();
 	            return true;
 	        } else {
 	            return false;
@@ -398,7 +418,6 @@ public class JDBCConnector {
 	        e.printStackTrace();
 	        return false;
 	    } finally {
-	        // Close resources to prevent memory leaks
 	        try {
 	            if (ps != null) {
 	                ps.close();
@@ -406,6 +425,9 @@ public class JDBCConnector {
 	            if (conn != null) {
 	                conn.close();
 	            }
+				if (rs != null){
+					rs.close();
+				}
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -416,14 +438,17 @@ public class JDBCConnector {
 	public static boolean createComment(String content, int userid, int titleid, int timeOfPost) {
 	    Connection conn = null;
 	    PreparedStatement ps = null;
+		ResultSet rs = null;
+	    
+	    int points = 0;
 
 	    
 	    try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
-			String sql = "INSERT INTO Comments (userid, comment, titleid, creationtime, likes) VALUES (?, ?, ?, ?, ?)";
+			String sql1 = "INSERT INTO Comments (userid, comment, titleid, creationtime, likes) VALUES (?, ?, ?, ?, ?)";
 			
-	        ps = conn.prepareStatement(sql);
+	        ps = conn.prepareStatement(sql1);
 	        
 	        Timestamp creationTime = new Timestamp(System.currentTimeMillis());
 	        
@@ -436,6 +461,26 @@ public class JDBCConnector {
 	        int result = ps.executeUpdate();
 	        
 	        if (result > 0) {
+	        	String sql2 = "SELECT points FROM user where userid = ?";
+	        	
+	        	ps = conn.prepareStatement(sql2);
+	        	ps.setInt(1, userid);
+	        	rs = ps.executeQuery();
+	        	
+	        	if (rs.next()) {
+	        		points = rs.getInt("points");
+	        		points ++;  // Add one point for new comment
+	        	}
+	        	
+	        	String updatePoints = "UPDATE user SET points = ? WHERE userid = ?";
+	        	ps = conn.prepareStatement(updatePoints);
+	        	
+	        	ps.setInt(1, points);
+	        	ps.setInt(2, userid);
+	        	
+	        	ps.executeUpdate();
+	        	
+	        	
 	        	return true;
 	        }else {
 	        	return false;
@@ -456,6 +501,9 @@ public class JDBCConnector {
 	            if (conn != null) {
 	                conn.close();
 	            }
+				if (rs != null){
+					rs.close();
+				}
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
