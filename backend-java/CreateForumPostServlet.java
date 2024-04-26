@@ -46,36 +46,31 @@ public class CreateForumPostServlet extends HttpServlet {
 					String error = "Missing create post info";
 					pw.write(gson.toJson(error));
 					pw.flush();     	
-	        }
-	        
-	        boolean canPost = false;
-	        
-	        try {
-				canPost = JDBCConnector.createPost(title, fgid, userid, post);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        
-	        if (canPost) {
-	        	response.setStatus(HttpServletResponse.SC_OK);
-				 Map<String, String> success = new HashMap<>();
-			     success.put("success", "Post created successfully");
-			     System.out.println(gson.toJson(success));
-				 pw.write(gson.toJson(success));
-				 pw.flush();	     		
 	        } else {
-	        	response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				Map<String, String> error = new HashMap<>();
-			    error.put("error", "Unsuccessful Post Creation");
-			    System.out.println(gson.toJson(error));
-				pw.write(gson.toJson(error));
-				pw.flush();		        	
-	        }
-	        
-	        
-	        
-		  
+		        boolean canPost = false;
+		        
+		        try {
+					canPost = JDBCConnector.createPost(title, fgid, userid, post);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		        
+		        if (canPost) {
+		        	response.setStatus(HttpServletResponse.SC_OK);
+					 Map<String, String> success = new HashMap<>();
+				     success.put("success", "Post created successfully");
+				     System.out.println(gson.toJson(success));
+					 pw.write(gson.toJson(success));
+					 pw.flush();	     		
+		        } else {
+		        	response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+					Map<String, String> error = new HashMap<>();
+				    error.put("error", "Unsuccessful Post Creation");
+				    System.out.println(gson.toJson(error));
+					pw.write(gson.toJson(error));
+					pw.flush();		        	
+		        }
+	        }  
 		  
 	  }
 	  
