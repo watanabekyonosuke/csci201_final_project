@@ -21,7 +21,7 @@ const SignIn = () => {
                     const reply = JSON.parse(xhr.responseText);
                     const userId = reply.userId;
                     localStorage.setItem("uid", userId);
-                    alert(reply.success);
+                    alert("Login Success");
                     navigate("/Landing");
 
                     
