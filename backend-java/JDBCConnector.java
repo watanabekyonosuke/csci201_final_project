@@ -590,5 +590,45 @@ public class JDBCConnector {
 	    
 	    return userid;
 	}
+
+	public static int getPoints(int userid) throws ClassNotFoundException {
+	    Connection conn = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    
+	    int points = 0;
+	    
+	    try {
+	    	Class.forName("com.mysql.cj.jdbc.Driver");
+		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
+		    
+		    String sql = "SELECT points FROM user WHERE userid = ?";
+		    
+		    ps = conn.prepareStatement(sql);
+		    ps.setInt(1, userid);
+		    
+		    rs = ps.executeQuery();
+		    
+		    if (rs.next()) {
+		    	points = rs.getInt("points");
+		    }
+		    
+		    return points;
+	    }catch (SQLException e) {
+	        e.printStackTrace();
+	        return -1;
+	    } finally {
+	        try {
+	            if (ps != null) {
+	                ps.close();
+	            }
+	            if (conn != null) {
+	                conn.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
 	
 }
