@@ -6,3 +6,14 @@
 .DiscussionItem {
     margin-bottom: 20px;
 }
+
+
+.new-discussion-button a{
+    text-decoration: none;
+    font-size: 17px;
+    padding: 10px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    color: #ffffff;
+    background-color: #000000;
+}

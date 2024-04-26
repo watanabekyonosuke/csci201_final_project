@@ -45,6 +45,7 @@ const ForumList = () => {
                     </div>
                 ))}
             </div>
+            <div className="new-discussion-button"><Link to='/CreatePost'>Post Discussion</Link></div>   
         </div>
     );
 };
