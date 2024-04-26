@@ -5,7 +5,7 @@ const ForumHeader = () => {
 
     const [selectedButton, setSelectedButton] = useState(2); // Initially set to 2nd button
 
-    if(selectedButton == 2) localStorage.setItem("forumGroup", 2); // Initially set stored fid to 2nd button
+    if(selectedButton === 2) localStorage.setItem("forumGroup", 2); // Initially set stored fid to 2nd button
 
     const handleButtonClick = (buttonIndex) => {
         setSelectedButton(buttonIndex);
@@ -30,7 +30,7 @@ return (
         <button className={selectedButton === 5 ? 'selected' : ''} onClick={() => handleButtonClick(5)}>
             MAANG
         </button>
-        <button className={selectedButton === 6 ? 'selected' : ''} onClick={() => handleButtonClick(5)}>
+        <button className={selectedButton === 6 ? 'selected' : ''} onClick={() => handleButtonClick(6)}>
             Hardware
         </button>
     </div>

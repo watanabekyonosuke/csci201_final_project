@@ -20,6 +20,7 @@
 
 .site-header__right {
     display: flex;
+    align-items: center;
 }
 
 .site-header__title {
