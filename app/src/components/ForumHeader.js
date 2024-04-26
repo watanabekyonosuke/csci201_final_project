@@ -5,14 +5,18 @@ const ForumHeader = () => {
 
     const [selectedButton, setSelectedButton] = useState(2); // Initially set to 2nd button
 
+    if(selectedButton == 2) localStorage.setItem("forumGroup", 2); // Initially set stored fid to 2nd button
+
     const handleButtonClick = (buttonIndex) => {
         setSelectedButton(buttonIndex);
+        localStorage.setItem("forumGroup", buttonIndex);
+        console.log(localStorage.getItem("forumGroup"));
       };
 
 return (
     <div className="NavContainer">
         <button className={selectedButton === 1 ? 'selected' : ''} onClick={() => handleButtonClick(1)}>
-            More Discussions v
+            Misc
         </button>
         <button className={selectedButton === 2 ? 'selected' : ''} onClick={() => handleButtonClick(2)}>
             SWE
@@ -25,6 +29,9 @@ return (
         </button>
         <button className={selectedButton === 5 ? 'selected' : ''} onClick={() => handleButtonClick(5)}>
             MAANG
+        </button>
+        <button className={selectedButton === 6 ? 'selected' : ''} onClick={() => handleButtonClick(5)}>
+            Hardware
         </button>
     </div>
     );
