@@ -52,7 +52,20 @@
 
 .user-profile-icon {
     font-size: 35px;
-    margin-top: 20x;
+    margin-top: 50x;
     margin-left: 30px; 
     color: #000000; 
+    cursor: pointer; /* Add cursor pointer for clickable icon */
 }
+
+.dropdown-content {
+    position: absolute;
+    top: 100%; /* Position below the profile icon */
+    left: 0;
+    background-color: #000000;
+    min-width: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1000; /* Ensure the dropdown is on top */
+}
+

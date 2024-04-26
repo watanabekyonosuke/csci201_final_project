@@ -1,5 +1,5 @@
-import React from 'react';
-import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
+import React, {useState} from 'react';
+import { Outlet, Link, useLocation} from "react-router-dom";
 import { FaHome } from 'react-icons/fa';
 import { VscAccount } from "react-icons/vsc";
 import './SiteHeader.css';
@@ -7,7 +7,7 @@ import './SiteHeader.css';
 const SiteHeader = () => {
 
     const location = useLocation();
-    const navigate = useNavigate();
+    const [dropdownVisible, setDropdownVisible] = useState(false); // State to manage dropdown visibility
     let logsign = location.pathname.includes("/SignIn") || location.pathname.includes("/SignUp");
     let discussing = location.pathname.includes("/ForumList") || location.pathname.includes("Discussion");
 
@@ -16,6 +16,10 @@ const SiteHeader = () => {
 
     const handleLogout = () =>{
         localStorage.removeItem("uid");
+    }
+
+    const showProfile = () =>{
+        setDropdownVisible(!dropdownVisible);
     }
 
     return (
@@ -39,7 +43,14 @@ const SiteHeader = () => {
                         {uid && (
                         <div onClick={handleLogout}><li className="logout"><Link to="/Landing">Logout</Link></li></div> )}
                         {uid &&
-                          <div className="user-profile-icon"><VscAccount /> </div> }
+                          <div className="user-profile-icon" onClick={showProfile}><VscAccount /> </div> }
+                        {dropdownVisible && (
+                                <div className="dropdown-content">
+                                    {/* Dropdown content */}
+                                    <p>User profile info</p>
+                                    <p>Settings</p>
+                                </div>
+                            )}
                     </div>
                 </header>
             </div>
