@@ -30,7 +30,7 @@ return (
         <button className={selectedButton === 5 ? 'selected' : ''} onClick={() => handleButtonClick(5)}>
             MAANG
         </button>
-        <button className={selectedButton === 6 ? 'selected' : ''} onClick={() => handleButtonClick(5)}>
+        <button className={selectedButton === 6 ? 'selected' : ''} onClick={() => handleButtonClick(6)}>
             Hardware
         </button>
     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { FaHome } from 'react-icons/fa';
+import { VscAccount } from "react-icons/vsc";
 import './SiteHeader.css';
 
 const SiteHeader = () => {
@@ -37,6 +38,8 @@ const SiteHeader = () => {
                         <li className="signup"><Link to="/SignUp">Sign Up</Link></li> )}
                         {uid && (
                         <div onClick={handleLogout}><li className="logout"><Link to="/Landing">Logout</Link></li></div> )}
+                        {uid &&
+                          <div className="user-profile-icon"><VscAccount /> </div> }
                     </div>
                 </header>
             </div>
