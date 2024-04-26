@@ -14,7 +14,7 @@ const ForumHeader = () => {
         setSelectedButton(buttonIndex);
         localStorage.setItem("forumGroup", buttonIndex);
         console.log(localStorage.getItem("forumGroup"));
-        navigate("/Forum");
+        navigate("/ForumList");
       };
 
 return (
