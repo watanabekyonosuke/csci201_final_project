@@ -1,19 +1,82 @@
-.DiscussionList {
+.forumContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+ 
+ 
+ .discussionList {
     display: flex;
     flex-direction: column;
-}
-
-.DiscussionItem {
-    margin-bottom: 20px;
-}
-
-
-.new-discussion-button a{
-    text-decoration: none;
-    font-size: 17px;
-    padding: 10px;
-    border: 2px solid #000000;
-    border-radius: 5px;
-    color: #ffffff;
-    background-color: #000000;
-}
+    gap: 20px; /* Adjust the gap between items */
+    width: 100%;
+ }
+ 
+ 
+ .discussionItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 8px;
+ }
+ 
+ 
+ .discussionTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    flex: 2; /* Adjust based on preference */
+ }
+ 
+ 
+ 
+ 
+ .discussionAttributes {
+    display: flex;
+    align-items: center;
+    justify-content: space-around; /* This will spread your attributes horizontally */
+    flex: 3; /* Adjust based on preference */
+ }
+ 
+ 
+ .discussionAttributes > div {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Adjust the gap between the icon and number */
+ }
+ 
+ 
+ /* Add some style to the icons if needed */
+ .discussionAttributes .fa {
+    font-size: 1.2rem; /* Icon size */
+ }
+ 
+ 
+ @media (max-width: 768px) {
+    .discussionItem {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+   
+    .discussionAttributes {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-top: 10px;
+        width: 100%;
+    }
+   
+    .discussionAttributes > div {
+        margin: 5px 0;
+    }
+ }
+ 
+ 
+ body {
+    background-color: #f0f0f0; /* Or any grey color you prefer */
+  }
+ 
