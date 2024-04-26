@@ -40,6 +40,10 @@
     background-color: #ffffff;
 }
 
+.logout a{
+    margin-right: 30px;
+}
+
 .signup a{
     text-decoration: none;
     font-size: 17px;
@@ -50,22 +54,44 @@
     background-color: #000000;
 }
 
-.user-profile-icon {
-    font-size: 35px;
-    margin-top: 50x;
-    margin-left: 30px; 
-    color: #000000; 
-    cursor: pointer; /* Add cursor pointer for clickable icon */
+.full-profile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
+.user-profile-icon {
+    font-size: 35px;
+    margin-top: 70x;
+    color: #000000; 
+    cursor: pointer;
+    position: relative;
+}
+
+.dropdown-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
 .dropdown-content {
-    position: absolute;
-    top: 100%; /* Position below the profile icon */
-    left: 0;
-    background-color: #000000;
-    min-width: 100px;
-    border: 1px solid #ccc;
+    background-color: #ffffff;
+    min-width: 150px;
+    border: 2px solid #000000;
     border-radius: 5px;
-    z-index: 1000; /* Ensure the dropdown is on top */
+    z-index: 1000;
+    margin-left: 30px;
+    font-size: 17px; 
+}
+
+.arrow{
+    color: #000000;
+    margin-left: -10px; /* Adjust as needed */
+}
+
+.dropdown-content p {
+    color: #000000;
+    padding: 0px;
+    margin: 0px;
 }
 

@@ -34,6 +34,7 @@ const SignUp = () => {
         };
 
         const sendJSON = JSON.stringify({username: uname, email: email, password: pword});
+        localStorage.setItem("username", uname);
         xhr.send(sendJSON);
 
     };

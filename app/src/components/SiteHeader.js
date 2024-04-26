@@ -7,7 +7,11 @@ import './SiteHeader.css';
 const SiteHeader = () => {
 
     const location = useLocation();
-    const [dropdownVisible, setDropdownVisible] = useState(false); // State to manage dropdown visibility
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    const username = localStorage.getItem("username");
+    let points = -10000;
+
     let logsign = location.pathname.includes("/SignIn") || location.pathname.includes("/SignUp");
     let discussing = location.pathname.includes("/ForumList") || location.pathname.includes("Discussion");
 
@@ -16,10 +20,44 @@ const SiteHeader = () => {
 
     const handleLogout = () =>{
         localStorage.removeItem("uid");
+        showProfile();
     }
 
     const showProfile = () =>{
-        setDropdownVisible(!dropdownVisible);
+        setShowDropdown(!showDropdown);
+    }
+
+    const getPoints = () =>{
+
+        const uid = localStorage.getItem("uid");
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", 'http://localhost:3001/ProjectBackend/GetTotalPointsServlet', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    const reply = JSON.parse(xhr.responseText);
+
+                    localStorage.setItem("points", reply);
+
+                }
+                else{
+                    console.log("error");
+                }
+            }
+        };
+
+        const sendJSON = JSON.stringify({userid: uid});
+        xhr.send(sendJSON);
+
+    }
+
+    const clickIcon = () =>{
+        getPoints();
+        points = localStorage.getItem("points");
+        showProfile();
     }
 
     return (
@@ -42,15 +80,22 @@ const SiteHeader = () => {
                         <li className="signup"><Link to="/SignUp">Sign Up</Link></li> )}
                         {uid && (
                         <div onClick={handleLogout}><li className="logout"><Link to="/Landing">Logout</Link></li></div> )}
-                        {uid &&
-                          <div className="user-profile-icon" onClick={showProfile}><VscAccount /> </div> }
-                        {dropdownVisible && (
-                                <div className="dropdown-content">
-                                    {/* Dropdown content */}
-                                    <p>User profile info</p>
-                                    <p>Settings</p>
-                                </div>
+                        <div className="full-profile">
+                         {showDropdown && (
+                        <div className = "dropdown-container">
+                            <div className="dropdown-content">
+                                    <p> {username} </p>
+                                    <p> {points} </p>
+                            </div>
+                            <div className="arrow">&#9658;</div>
+                        </div>
+                             )}
+                        {uid && (
+                        <div className="user-profile-container">
+                            <div className="user-profile-icon" onClick={clickIcon}><VscAccount /></div>
+                        </div>
                             )}
+                        </div>
                     </div>
                 </header>
             </div>

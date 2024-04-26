@@ -23,8 +23,6 @@ const SignIn = () => {
                     localStorage.setItem("uid", userId);
                     alert("Login Success");
                     navigate("/Landing");
-
-                    
                 }
                 else{
                     const reply = JSON.parse(xhr.responseText);
@@ -34,6 +32,7 @@ const SignIn = () => {
         };
 
         const sendJSON = JSON.stringify({username: uname, password: pword});
+        localStorage.setItem("username", uname);
         xhr.send(sendJSON);
 
     };
