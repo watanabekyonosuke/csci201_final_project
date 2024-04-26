@@ -6,27 +6,6 @@ import './SiteHeader.css';
 
 const SiteHeader = () => {
 
-    const location = useLocation();
-    const [showDropdown, setShowDropdown] = useState(false);
-
-    const username = localStorage.getItem("username");
-    let points = -10000;
-
-    let logsign = location.pathname.includes("/SignIn") || location.pathname.includes("/SignUp");
-    let discussing = location.pathname.includes("/ForumList") || location.pathname.includes("Discussion");
-
-    let uid = localStorage.getItem("uid");
-    console.log(uid);
-
-    const handleLogout = () =>{
-        localStorage.removeItem("uid");
-        showProfile();
-    }
-
-    const showProfile = () =>{
-        setShowDropdown(!showDropdown);
-    }
-
     const getPoints = () =>{
 
         const uid = localStorage.getItem("uid");
@@ -40,6 +19,7 @@ const SiteHeader = () => {
                 if (xhr.status === 200) {
                     const reply = JSON.parse(xhr.responseText);
 
+                    
                     localStorage.setItem("points", reply);
 
                 }
@@ -54,9 +34,31 @@ const SiteHeader = () => {
 
     }
 
+    const location = useLocation();
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    getPoints();
+
+    const username = localStorage.getItem("username");
+    let points = localStorage.getItem("points");
+
+    let logsign = location.pathname.includes("/SignIn") || location.pathname.includes("/SignUp");
+    let discussing = location.pathname.includes("/ForumList") || location.pathname.includes("Discussion");
+
+    let uid = localStorage.getItem("uid");
+    console.log(uid);
+
+    const handleLogout = () =>{
+        localStorage.removeItem("uid");
+        setShowDropdown(false);
+    }
+
+    const showProfile = () =>{
+        setShowDropdown(!showDropdown);
+    }
+
     const clickIcon = () =>{
-        getPoints();
-        points = localStorage.getItem("points");
+        console.log(points);
         showProfile();
     }
 
