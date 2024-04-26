@@ -19,8 +19,8 @@ import com.google.gson.Gson;
 
 
 public class JDBCConnector {
-	private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
+	private static final String DB_USER = "admin";
+    private static final String DB_PASSWORD = "201finalproject";
 	public static List<Integer> sortbyLikes() throws SQLException{
 	    List<Integer> disIDs = new ArrayList<>();
 	    try {
@@ -32,8 +32,8 @@ public class JDBCConnector {
 	    Connection conn = null;
 	    Statement st = null;
 	    ResultSet rs = null;
-
-	    conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+	    
+	    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
         
 	    String query = "SELECT titleid " +
                 "FROM ForumDiscussions " +
@@ -73,7 +73,7 @@ public class JDBCConnector {
 	    ResultSet rs = null;
 
 	    try {
-	        conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
 
 	        String query = "SELECT titleid " +
 	                       "FROM ForumDiscussions " +
@@ -117,7 +117,7 @@ public class JDBCConnector {
 	    ResultSet rs = null;
 
 	    try {
-	        conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
 
 	        String query = "SELECT titleid " +
 	                       "FROM ForumDiscussions " +
@@ -159,7 +159,7 @@ public class JDBCConnector {
 	    ResultSet rs = null;
 
 	    try {
-	        conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
 
 	        String query = "SELECT titleid " +
 	                       "FROM ForumDiscussions " +
@@ -203,7 +203,7 @@ public class JDBCConnector {
 	    ResultSet rs = null;
 
 	    try {
-	        conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
 
 	        String query = "SELECT fd.titleid, fd.title, fd.fgid, fd.userid, u.username, fd.post, fd.creationtime, fd.likes, " +
                     "       (SELECT COUNT(*) FROM Comments c WHERE c.titleid = fd.titleid) AS commentCount " +
@@ -264,7 +264,7 @@ public class JDBCConnector {
 	    ResultSet rs = null;
 	
 	    try {
-	        conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
 	
 	        String query = "SELECT c.titleid, fd.title, c.comment AS content, c.likes, " +
 	                       "       TIMESTAMPDIFF(HOUR, c.creationtime, NOW()) AS hours, " +
@@ -322,7 +322,7 @@ public class JDBCConnector {
 		int userid = -1;
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
 			
 			st = conn.createStatement();
 			System.out.println("Connected to database successfully.");
@@ -371,7 +371,7 @@ public class JDBCConnector {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
 			String sql = "INSERT INTO ForumDiscussions (title, fgid, userid, post, creationtime, likes) VALUES (?, ?, ?, ?, ?, ?)";
 			
 	        ps = conn.prepareStatement(sql);
@@ -420,8 +420,8 @@ public class JDBCConnector {
 	    
 	    try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
-			String sql = "INSERT INTO comments (userid, comment, titleid, creationtime, likes) VALUES (?, ?, ?, ?, ?)";
+		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
+			String sql = "INSERT INTO Comments (userid, comment, titleid, creationtime, likes) VALUES (?, ?, ?, ?, ?)";
 			
 	        ps = conn.prepareStatement(sql);
 	        
@@ -469,9 +469,9 @@ public class JDBCConnector {
 	    
 	    try {
 	        Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
 	        
-	        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+	        String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
 	        ps = conn.prepareStatement(sql);
 	        ps.setString(1, username);
 	        ps.setString(2, password);
@@ -513,9 +513,9 @@ public class JDBCConnector {
 	    
 	    try {
 	        Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/forumdata?user=" + DB_USER + "&password=" + DB_PASSWORD);
+		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
 			
-			String query = "SELECT userid FROM user WHERE username = ?";
+			String query = "SELECT userid FROM User WHERE username = ?";
 			ps = conn.prepareStatement(query);
 			ps.setString(1, username);
 			
