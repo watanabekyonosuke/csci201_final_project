@@ -10,7 +10,8 @@ CREATE TABLE User (
     userid INT PRIMARY KEY  NOT NULL AUTO_INCREMENT,
     username VARCHAR(255),
     email VARCHAR(255),
-    password VARCHAR(255)
+    password VARCHAR(255),
+    points INT
 );
 
 CREATE TABLE ForumDiscussions (
