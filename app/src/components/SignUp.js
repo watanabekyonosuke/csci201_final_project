@@ -6,7 +6,7 @@ const SignUp = () => {
 
     return (
         <div className="signup-container">
-        <a><Link to="/Landing" className="back-button">&#8592;</Link></a>
+        <Link to="/Landing" className="back-button">&#8592;</Link>
         <form action="forumdata" method="post">
             <fieldset>
                 <legend>Sign Up</legend>
