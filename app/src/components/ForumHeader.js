@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ForumHeader.css';
 
 const ForumHeader = () => {
+
+    const navigate = useNavigate();
 
     const [selectedButton, setSelectedButton] = useState(2); // Initially set to 2nd button
 
@@ -11,6 +14,7 @@ const ForumHeader = () => {
         setSelectedButton(buttonIndex);
         localStorage.setItem("forumGroup", buttonIndex);
         console.log(localStorage.getItem("forumGroup"));
+        navigate("/Forum");
       };
 
 return (
