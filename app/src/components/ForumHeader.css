@@ -6,17 +6,38 @@
     margin: 0 auto;
 }
 
-.NavContainer button{
-    border: none;
-    border-radius: 8px;
+.NavContainer button {
+    border: 2px solid #D6D6D6; /* Light grey border */
+    border-radius: 12px; /* Adjust for more or less roundness */
     background-color: #ffffff;   
     color: #767676;
     font-family: Verdana; 
     font-size: 15px;
     padding: 10px 20px;
     cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for hover and focus effects */
+    margin-right: 10px; /* Add spacing between buttons */
 }
 
+
 .NavContainer button.selected {
-    background-color: #E9E9E9 ; /* Greyed background for selected button */
+    background-color: #30A0A0 ; /* This is the current grey background */
+    border: 2px solid #30A0A0; /* Muted teal border */
+    color: #E9E9E9; 
+}
+
+.NavContainer button:hover {
+    transform: translateY(-0.5px); 
+}
+
+.forumTitle {
+    color: #8B4513; /* A shade of brown */
+    margin-bottom: 10px; /* Add space between the title and the buttons */
+    font-size: 2.0rem; /* Adjust the font size as needed */
+    font-family: 'Open Sans', sans-serif; /* Maintain the font family consistency */
+  }
+  .headerWrapper {
+    text-align: center; /* Center the title and nav container */
+    padding: 20px; /* Add some padding */
+    margin-bottom: 20px; /* Add space between the header and the rest of the content */
   }
