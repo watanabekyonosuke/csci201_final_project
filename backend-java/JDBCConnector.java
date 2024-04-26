@@ -591,7 +591,7 @@ public class JDBCConnector {
 	    int points = 0;
 	    
 	    try {
-	    	Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
 		    
 		    String sql = "SELECT points FROM User WHERE userid = ?";
@@ -629,5 +629,95 @@ public class JDBCConnector {
 	    return Math.max(diffInHours, 0); // Ensure no negative values
 	}
 
+	public static boolean insertUpvote(int userid, int titleid, String type) {
+		
+		Connection conn = null;
+   
+	    try {
+	    	Class.forName("com.mysql.cj.jdbc.Driver");
+		    conn = DriverManager.getConnection("jdbc:mysql://csoasis.cb6ymk6iw65j.us-west-1.rds.amazonaws.com:3306/ForumData?user=" + DB_USER + "&password=" + DB_PASSWORD);
+		    
+		    if (type.equals("post")) {
+		    	return upvotePost(conn, userid, titleid);
+		    } else if (type.equals("comment")) {
+		    	return upvoteComment(conn, userid, titleid);
+		    }
+	    }catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
+	}
 	
+	 private static boolean upvotePost(Connection conn, int userid, int titleid) throws SQLException {
+	        int recipientid = getRecipientId(conn, titleid, "post");
+	        if (recipientid == -1) {
+	            return false;  
+	        }
+
+	        if (!updateLikes(conn, "ForumDiscussions", "titleid", titleid)) {
+	            return false;  
+	        }
+
+	        return insertIntoUpvotes(conn, userid, recipientid, titleid, null, "post");
+	    }
+
+	    private static boolean upvoteComment(Connection conn, int userid, int commentid) throws SQLException {
+	        int recipientid = getRecipientId(conn, commentid, "comment");
+	        if (recipientid == -1) {
+	            return false;  
+	        }
+
+	        if (!updateLikes(conn, "Comments", "commentid", commentid)) {
+	            return false;  
+	        }
+
+	        return insertIntoUpvotes(conn, userid, recipientid, null, commentid, "comment");
+	    }
+
+	    private static boolean updateLikes(Connection conn, String tableName, String columnName, int id) throws SQLException {
+	        String sql = "UPDATE " + tableName + " SET likes = likes + 1 WHERE " + columnName + " = ?";
+	        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+	            ps.setInt(1, id);
+	            int update = ps.executeUpdate();
+	            if (update > 0) {return true;}
+	            else { return false;}
+	        }
+	    }
+
+	    private static boolean insertIntoUpvotes(Connection conn, int userid, int recipientid, Integer titleid, Integer commentid, String type) throws SQLException {
+	        String sql = "INSERT INTO upvotes (userid, recipientid, postid, commentid, type, creationtime) VALUES (?, ?, ?, ?, ?, NOW())";
+	        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+	            ps.setInt(1, userid);
+	            ps.setInt(2, recipientid);
+	            ps.setObject(3, titleid);
+	            ps.setObject(4, commentid);
+	            ps.setString(5, type);
+	            int inserted = ps.executeUpdate();
+	            if (inserted > 0) {return true;}
+	            else {return false;}
+	        }
+	    }
+
+	    private static int getRecipientId(Connection conn, int id, String type) throws SQLException {
+	        String table = (type.equals("post")) ? "ForumDiscussions" : "Comments";
+	        String column = (type.equals("post")) ? "titleid" : "commentid";
+	        String sql = "SELECT userid FROM " + table + " WHERE " + column + " = ?";
+	        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+	            ps.setInt(1, id);
+	            try (ResultSet rs = ps.executeQuery()) {
+	                if (rs.next()) {
+	                    return rs.getInt("userid");
+	                }
+	            }
+	        }
+	        return -1; 
+	    }
 }
