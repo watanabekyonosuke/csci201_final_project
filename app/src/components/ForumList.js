@@ -25,6 +25,8 @@ const ForumList = () => {
         xhr.onerror = () => {
             console.error('Error fetching discussions:', xhr.statusText);
         };
+        // let fgid_ = localStorage.getItem("forumGroup");
+        // need button to set sort method in ForumHeader -> drop down select
         xhr.send(JSON.stringify({ fgid: 0, sort: 0 }));
     };
 
