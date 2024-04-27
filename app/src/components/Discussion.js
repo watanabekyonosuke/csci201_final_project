@@ -66,37 +66,51 @@ const Discussion = () => {
      };
 
     return (
-        <div className="comment-container">
-            <Link to="/ForumList" className="back-button">&#8592;</Link>
-            <div className="commentList">
-            
-               {comments.map((comment, index) => (
-                    <div key={index} className="commentItem">
-                    <div className="commentTitle">{comment.title}</div>
-                    <div className="commentAttributes">
-                        <div className="commentLikes">
-                            <button
-                                onClick={() => handleLikeClick(comment.titleid, comment.liked)}
-                                className={`like-button ${comment.liked ? 'liked' : ''}`}>
-                                <FaRegThumbsUp /> {comment.likes}
-                            </button>
-                        </div>
-                        <div className="commentAge">
-                            {comment.hours} hours ago
-                        </div>
-                        <div className="commentContent">
-                            {comment.content}
-                        </div>
-                        <div className="commentUser">
-                            Posted by: {comment.username}
-                        </div>
-                    </div>
-                </div>
-                
-               ))}
-               <button id='create-comment' onClick={handleCreateCommentClick}>Add Comment</button> 
-           </div>
-        </div>
+             <div className="comment-container">
+                <Link to="/ForumList" className="back-button">&#8592;</Link>
+                <div className="commentList">
+                
+                   {comments.map((comment, index) => (
+                
+                   
+                        <div key={index} className="commentItem">
+                    
+                <div class = "overall"> 
+                    <div class = "holder"> 
+                        <div className="commentTitle"></div> 
+                    </div>
+    
+                    <div class = "secondHolder">
+                        <div className="commentAttributes">
+                            <div className="commentContent">
+                                {comment.content}
+                            </div>
+                        <div class = "holdLikesAge">
+                            <div className="commentLikes">
+                                <button
+                                    onClick={() => handleLikeClick(comment.titleid, comment.liked)}
+                                    className={`like-button ${comment.liked ? 'liked' : ''}`}>
+                                    <FaRegThumbsUp /> {comment.likes}
+                                </button>
+                            </div>
+                            <div className="commentAge">
+                                {comment.hours} hours ago
+                            </div>
+                        <div className="commentUser">
+                                Posted by: {comment.username}
+                            </div>
+                        </div>
+                            
+                           
+                    </div>
+                        </div>
+                    </div>
+                
+             </div>
+                   ))}
+                   <button id='create-comment' onClick={handleCreateCommentClick}>Add Comment</button> 
+               </div>
+            </div>
     );
 }
 

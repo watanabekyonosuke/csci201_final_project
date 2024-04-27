@@ -22,15 +22,19 @@
     border-radius: 8px;
  }
  
- 
-  .commentTitle {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-right: 1rem;
-    flex: 1; /* Allows title to grow and fill available space */
-    min-width: 0; /* Ensures it doesn't overflow its container */
-    word-break: break-word; /* Ensures the text wraps within the container */
-    }
+.overall{
+    display: flexbox;
+}
+.commentTitle {
+font-size: 1rem;
+font-weight: 600;
+margin-right: 1rem;
+flex: 1; /* Allows title to grow and fill available space */
+min-width: 0; /* Ensures it doesn't overflow its container */
+/*  word-break: break-word; /* Ensures the text wraps within the container */
+width: 768px;
+
+}
  
     .commentAttributes {
         display: flex;
@@ -54,7 +58,8 @@
  }
  
  
- @media (max-width: 768px) {
+
+  
     .commentItem {
         flex-direction: column;
         align-items: flex-start;
@@ -71,8 +76,11 @@
     .commentAttributes > div {
         margin: 5px 0;
     }
- }
  
+ .holdLikesAge{
+    display: flex;
+    justify-content: space-evenly;
+ }
  
  body {
     font-family: 'Open Sans', sans-serif;
