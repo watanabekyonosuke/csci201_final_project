@@ -8,7 +8,7 @@ const ForumList = () => {
 
     // fetch user id to determine whether to limit create post button
     var loggedIn = localStorage.getItem("uid");
-    var navigate = useNavigate();
+    const navigate = useNavigate();
     const handleCreatePostClick = () => {
         if (!loggedIn) {
             alert("Please Sign In or Register to Make a Post!");
@@ -19,10 +19,16 @@ const ForumList = () => {
 
    const [discussions, setDiscussions] = useState([]);
 
-
    useEffect(() => {
        fetchDiscussions();
    }, []);
+
+   const handleDiscussionItemClick = (discussionId) => {
+    // Store discussionId in localStorage for use in dicussion
+    localStorage.setItem("tid", discussionId);
+    console.log(localStorage.getItem("tid"))
+    navigate("/Discussion");
+    };
 
    // A handler that sends a like/unlike action to the server
     const handleLikeClick = (discussionId, isLiked) => {
@@ -74,12 +80,12 @@ const ForumList = () => {
            <ForumHeader onButtonClick={refreshForumList} />
            <div className="discussionList">
                {discussions.map((discussion, index) => (
-                   <div key={index} className="discussionItem">
+                   <div key={index} className="discussionItem" onClick={() => handleDiscussionItemClick(discussion.titleid)}>
                        <div className="discussionTitle">{discussion.title}</div>
                        <div className="discussionAttributes">
                             <div className="discussionLikes">
                                 <button
-                                    onClick={() => handleLikeClick(discussion.titleid, discussion.liked)}
+                                   onClick={() => handleLikeClick(discussion.titleid, discussion.liked)}
                                     className={`like-button ${discussion.liked ? 'liked' : ''}`}>
                                     <FaRegThumbsUp /> {discussion.likes}
                                 </button>
