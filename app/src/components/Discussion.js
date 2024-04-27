@@ -60,7 +60,6 @@ const Discussion = () => {
             <div className="commentList">
                {comments.map((comment, index) => (
                     <div key={index} className="commentItem">
-                    <div className="commentTitle">{comment.title}</div>
                     <div className="commentAttributes">
                         <div className="commentLikes">
                             <button
