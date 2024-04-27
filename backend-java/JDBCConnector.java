@@ -464,7 +464,7 @@ public class JDBCConnector {
 	        		points ++;  // Add one point for new comment
 	        	}
 	        	
-	        	String updatePoints = "UPDATE user SET points = ? WHERE userid = ?";
+	        	String updatePoints = "UPDATE User SET points = ? WHERE userid = ?";
 	        	ps = conn.prepareStatement(updatePoints);
 	        	
 	        	ps.setInt(1, points);

@@ -34,11 +34,12 @@ public class CreateCommentServlet extends HttpServlet{
 	        String content = comment.getContent();
 	        int timeOfPost = comment.getHours();
 	        int titleid = comment.getTitleid();
+	        int userId = comment.getUserid();
 	        
 	        Gson gson = new GsonBuilder().create();
 	        
-	    	Integer userId = (Integer) request.getSession().getAttribute("userid");
-	        
+	        System.out.println(content + " " + timeOfPost + " " + titleid + " " + userId);
+	        	        
 	        if (content == null || content.isBlank() 
 	        		|| timeOfPost <= 0 || titleid <= 0) {
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

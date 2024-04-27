@@ -29,11 +29,12 @@ const Discussion = () => {
         // If the API call fails, you'll need to revert the UI changes
         // This is where you would catch an error and revert if necessary
     };
-
-    const handleCreateCommentClick = () => {
+    
+    const handleCreateCommentClick = (titleId) => {
         if (!loggedIn) {
             alert("Please Sign In or Register to Make a Post!");
         } else {
+            console.log(localStorage.getItem("tid"));
             navigate("/CreateComment");
         }
     }

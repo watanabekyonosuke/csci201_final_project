@@ -14,8 +14,9 @@ const CreateComment = () => {
         // set up data to be sent
         const data = {
             content: content,
+            userid: parseInt(localStorage.getItem("uid")),
             hours: new Date().getHours(), // Assuming you want to set the current hour
-            tid: parseInt(localStorage.getItem("tid")) // Assuming tid is stored in localStorage
+            titleid: parseInt(localStorage.getItem("tid")) // Assuming tid is stored in localStorage
         };
 
         // set up request to post discussion through CreateForumPostServlet
