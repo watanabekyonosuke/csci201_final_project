@@ -10,7 +10,7 @@
 - In “servers” folder, find web.xml. Open with “generic text editor”.
 - Add the following tag before the first '<servlet></servlet>' tag to bypass CORS. 
 
-'<filter> <filter-name>CorsFilter</filter-name> <filter-class>org.apache.catalina.filters.CorsFilter</filter-class> <init-param> <param-name>cors.allowed.origins</param-name> <param-value>*</param-value> </init-param> <init-param> <param-name>cors.allowed.methods</param-name> <param-value>GET, POST, PUT, DELETE, OPTIONS</param-value> </init-param> <init-param> <param-name>cors.allowed.headers</param-name> <param-value>Content-Type, Authorization</param-value> </init-param> </filter> <filter-mapping> <filter-name>CorsFilter</filter-name> <url-pattern>/*</url-pattern> </filter-mapping>'
+'''<filter> <filter-name>CorsFilter</filter-name> <filter-class>org.apache.catalina.filters.CorsFilter</filter-class> <init-param> <param-name>cors.allowed.origins</param-name> <param-value>*</param-value> </init-param> <init-param> <param-name>cors.allowed.methods</param-name> <param-value>GET, POST, PUT, DELETE, OPTIONS</param-value> </init-param> <init-param> <param-name>cors.allowed.headers</param-name> <param-value>Content-Type, Authorization</param-value> </init-param> </filter> <filter-mapping> <filter-name>CorsFilter</filter-name> <url-pattern>/*</url-pattern> </filter-mapping>'''
 
 - Now in web perspective, click on the servers tab next to terminal, console, etc. Double click your Tomcat server.
 - Edit the HTML/1.1 portname to be “3001”
