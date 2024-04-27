@@ -20,18 +20,9 @@ const ForumList = () => {
 
    const [discussions, setDiscussions] = useState([]);
 
-   const navigate = useNavigate();
-
    useEffect(() => {
        fetchDiscussions();
    }, []);
-
-   const handleDiscussionItemClick = (discussionId) => {
-    // Store discussionId in localStorage for use in dicussion
-    localStorage.setItem("tid", discussionId);
-    console.log(localStorage.getItem("tid"))
-    navigate("/Discussion");
-    };
 
    const handleDiscussionItemClick = (discussionId) => {
     // Store discussionId in localStorage for use in dicussion
@@ -90,7 +81,6 @@ const ForumList = () => {
            <ForumHeader onButtonClick={refreshForumList} />
            <div className="discussionList">
                {discussions.map((discussion, index) => (
-                   <div key={index} className="discussionItem" onClick={() => handleDiscussionItemClick(discussion.titleid)}>
                    <div key={index} className="discussionItem" onClick={() => handleDiscussionItemClick(discussion.titleid)}>
                        <div className="discussionTitle">{discussion.title}</div>
                        <div className="discussionAttributes">
