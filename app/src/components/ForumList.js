@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './ForumList.css';
 import ForumHeader from './ForumHeader';
 import { FaRegThumbsUp } from 'react-icons/fa';
@@ -8,10 +8,18 @@ import { FaRegThumbsUp } from 'react-icons/fa';
 const ForumList = () => {
    const [discussions, setDiscussions] = useState([]);
 
+   const navigate = useNavigate();
 
    useEffect(() => {
        fetchDiscussions();
    }, []);
+
+   const handleDiscussionItemClick = (discussionId) => {
+    // Store discussionId in localStorage for use in dicussion
+    localStorage.setItem("tid", discussionId);
+    console.log(localStorage.getItem("tid"))
+    navigate("/Discussion");
+    };
 
    // A handler that sends a like/unlike action to the server
     const handleLikeClick = (discussionId, isLiked) => {
@@ -63,7 +71,7 @@ const ForumList = () => {
            <ForumHeader onButtonClick={refreshForumList} />
            <div className="discussionList">
                {discussions.map((discussion, index) => (
-                   <div key={index} className="discussionItem">
+                   <div key={index} className="discussionItem" onClick={() => handleDiscussionItemClick(discussion.titleid)}>
                        <div className="discussionTitle">{discussion.title}</div>
                        <div className="discussionAttributes">
                             <div className="discussionLikes">
