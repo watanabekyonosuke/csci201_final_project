@@ -135,32 +135,6 @@
     background-color: #e8f0fe; /* Light blue for interactivity */
 }
 
-
-/* New discussion button styles */
-.new-discussion-button {
-    background-color: #2b6cb0; /* A calming blue background */
-    color: white; /* White text on the blue background */
-    text-align: center;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 10px;
-  }
-  
-  /* Style the link to fill the button */
-.new-discussion-button a {
-    display: block; /* Make the link fill the container */
-    padding: 10px; /* Same padding as the button for consistent spacing */
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    /* If you are using flex, you may remove text-align from .new-discussion-button */
-  }
-  
-  .new-discussion-button:hover {
-    background-color: #2c5282; /* Darker blue on hover */
-    cursor: pointer;
-  }
-
   /* Additional styles for links, buttons, etc., to match the color theme */
 a, button {
     color: #2b6cb0; /* A calming blue color for link text */
@@ -170,4 +144,10 @@ a, button {
 header {
     background-color: #2b6cb0; /* A calming blue background for the header */
     /* Other header styles */
+  }
+
+  #create-post-button{
+    margin-top: 10px;
+    width: 200px;
+    height: 10;
   }

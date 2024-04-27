@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import './ForumList.css';
 import ForumHeader from './ForumHeader';
 import { FaRegThumbsUp } from 'react-icons/fa';
 
-
 const ForumList = () => {
+
+    // fetch user id to determine whether to limit create post button
+    var loggedIn = localStorage.getItem("uid");
+    var navigate = useNavigate();
+    const handleCreatePostClick = () => {
+        if (!loggedIn) {
+            alert("Please Sign In or Register to Make a Post!");
+        } else {
+            navigate("/CreatePost");
+        }
+    }
+
    const [discussions, setDiscussions] = useState([]);
 
 
@@ -80,9 +91,7 @@ const ForumList = () => {
                    </div>
                ))}
            </div>
-           <div className="new-discussion-button">
-            <Link to='/CreatePost'>Make a post!</Link>
-            </div>    
+            <button id='create-post-button' onClick={handleCreatePostClick}>Add Post</button> 
        </div>
    );
 };
