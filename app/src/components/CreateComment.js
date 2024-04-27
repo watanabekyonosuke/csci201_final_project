@@ -43,8 +43,6 @@ const CreateComment = () => {
     return (
         <div className='create-comment'>
 
-            BALSLS
-
             <form className='comment-form' onSubmit={handleCommentDiscussion}>
             
                 <div>

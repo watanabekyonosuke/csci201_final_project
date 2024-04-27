@@ -8,6 +8,7 @@ import Discussion from './components/Discussion';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import CreatePost from './components/CreatePost';
+import CreateComment from './components/CreateComment';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="Discussion" element={<Discussion />}/>
           <Route path="Landing" element={<Landing />}/>
           <Route path="CreatePost" element={<CreatePost />}/>
+          <Route path="CreateComment" element={<CreateComment />}/>
         </Routes>
       </div>
     </BrowserRouter>
