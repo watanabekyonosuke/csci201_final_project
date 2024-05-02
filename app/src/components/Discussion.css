@@ -1,125 +1,109 @@
-.comment-container a{
-    text-decoration: none;
-    font-size: 50px;
-    padding: 10px;
-    border-radius: 5px;
-    color: #000000;
-}
- 
- .commentList {
-    display: flex;
-    flex-direction: column;
-    gap: 7px; 
-    width: 100%;
- }
- 
- .commentItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #ddd;
-    padding: 10px 15px;
-    border-radius: 8px;
- }
- 
-.overall{
-    display: flexbox;
-}
-.commentTitle {
-font-size: 1rem;
-font-weight: 600;
-margin-right: 1rem;
-flex: 1; /* Allows title to grow and fill available space */
-min-width: 0; /* Ensures it doesn't overflow its container */
-/*  word-break: break-word; /* Ensures the text wraps within the container */
-width: 768px;
-
-}
- 
-    .commentAttributes {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end; /* Aligns attributes to the right */
-        flex-shrink: 0; /* Prevents the attributes from shrinking */
-        min-width: 160px; /* Fixed width for the attributes area */
-    }
- 
- 
- .commentAttributes > div {
-    display: flex;
-    align-items: center;
-    gap: 5px; /* Adjust the gap between the icon and number */
- }
- 
- 
- /* Add some style to the icons if needed */
- .commentAttributes .fa {
-    font-size: 1.2rem; /* Icon size */
- }
- 
- 
-
-  
-    .commentItem {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-   
-    .commentAttributes {
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        margin-top: 10px;
-        width: 100%;
-    }
-   
-    .commentAttributes > div {
-        margin: 5px 0;
-    }
- 
- .holdLikesAge{
-    display: flex;
-    justify-content: space-evenly;
- }
- 
- body {
-    font-family: 'Open Sans', sans-serif;
-    background-color: #edf2f7; /* A light grey/blue background */
-    color: #333; /* Standard text color for better readability */
-    margin: 0;
-    padding: 0;
-  }
- 
-  .commentLikes button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    color: inherit;
+.comment-section {
+  width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.commentLikes button.liked,
-.commentLikes button:hover {
-  color: #2b6cb0; /* A calming blue for liked state and hover */
+.comment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
 }
 
-.commentLikes {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center the content */
-    gap: 10px; /* Gap between the icon and the number */
-}
-.commentAge {
-    white-space: nowrap; /* Ensures the age stays on one line */
-    margin-left: 15px;
-}
-
-.commentLikes button:focus {
-    outline: none;          /* Remove the focus outline to maintain the desired look */
+.back-button {
+  padding: 12px 24px;
+  background-color: #fff;
+  border-radius: 5px;
+  color: #333;
+  text-decoration: none;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
 }
 
+.back-button:hover {
+  background-color: #e0e0e0;
+}
 
-.ikes svg {
-    margin-right: 10px;      /* Add some space between the icon and the number */
+.comment-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.comment-list {
+  display: grid;
+  grid-gap: 30px;
+}
+
+.comment-item {
+  width: 90%;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-content {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.comment-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.comment-likes {
+  margin-bottom: 10px;
+}
+
+.like-button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.like-button.liked {
+  color: #4CAF50;
+}
+
+.like-button:hover {
+  color: #45a049;
+}
+
+.comment-age {
+  font-size: 16px;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.comment-user {
+  font-size: 16px;
+  color: #888;
+}
+
+.create-comment-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 30px;
+}
+
+.create-comment-button:hover {
+  background-color: #45a049;
 }
