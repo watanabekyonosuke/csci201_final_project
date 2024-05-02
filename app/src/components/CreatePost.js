@@ -105,6 +105,7 @@ const CreatePost = () => {
                         <input type="radio" name="category" value={6} checked={fgid===6} onChange={() => setCategory(6)} />
                         Hardware
                     </label>
+                            <div></div>
                     <div id='submission'>
                         <button>
                             Submit
