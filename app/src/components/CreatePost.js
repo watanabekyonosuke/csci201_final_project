@@ -54,30 +54,26 @@ const CreatePost = () => {
 
             <form className='post-form' onSubmit={handlePostDiscussion}>
                 
-                <div>
-                    <label>
-                        <input
-                            type="text"
-                            id="title-input"
-                            placeholder="Title..."
-                            className="title-input"
-                            value = {title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                    </label>
+                <div className="form-group">
+                    <label>Title:</label>
+                    <textarea
+                        id="title-input"
+                        placeholder="Title..."
+                        className="form-control" // Add Bootstrap form-control class
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
                 </div>
 
-                <div>
-                <label>
-                    <input
-                        type="text"
+                <div className="form-group">
+                    <label>Body:</label>
+                    <textarea
                         id="body-input"
                         placeholder="Body..."
-                        className="body-input"
-                        value = {post}
-                        onChange={(e)=>setBody(e.target.value)}
+                        className="form-control" // Add Bootstrap form-control class
+                        value={post}
+                        onChange={(e) => setBody(e.target.value)}
                     />
-                </label>
                 </div>
                
                 <div className="radio-buttons">
