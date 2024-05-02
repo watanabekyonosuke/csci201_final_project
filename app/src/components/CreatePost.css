@@ -1,42 +1,104 @@
 .create-post {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 5%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* .title-input,
+.post-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-form label {
+  margin-bottom: 10px;
+}
+
+.title-input,
 .body-input {
-    width: 90%;
-    margin-bottom: 10px;
-    padding: 10px;
-    overflow-y: auto;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  color: #333;
+  transition: box-shadow 0.3s ease;
 }
 
-#title-input,
-#body-input {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-} */
+.title-input:focus,
+.body-input:focus {
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-.create-post {
-    margin-top: 5%;
+.radio-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  margin-top: 20px;
+}
+
+.radio-buttons label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.radio-buttons label:hover {
+  transform: translateY(-3px);
+}
+
+
+.radio-buttons input[type="radio"]:checked + label {
+  background-color: #4CAF50;
+  color: #fff;
 }
 
 #submission {
-    margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+#submission button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#submission button:hover {
+  background-color: #45a049;
 }
 
-.title-input{
-    width: 90%;
-    margin-bottom: 10px;
+.discussion-container {
+  margin-top: 20px;
+  text-align: center;
 }
 
-.body-input {
-    width: 90%;
-    margin-bottom: 10px;
-    overflow-wrap: break-word;
-    height: auto;
+.back-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #e0e0e0;
 }
